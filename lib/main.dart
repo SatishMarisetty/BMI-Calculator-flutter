@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -34,9 +35,16 @@ class _BMiState extends State<BMI> {
               child: Row(
                  children: <Widget>[
                    Expanded(
-                       child: container(Color(0xff1d1e33)),
-
-                         //child: Text(''),
+                       child: container(Color(0xff1d1e33),
+                         const Column(
+                           mainAxisAlignment: MainAxisAlignment.center,
+                           children: <Widget>[
+                             Icon(FontAwesomeIcons.mars,size: 80,),
+                             SizedBox(height: 15,),
+                             Text('MALE',style: TextStyle(fontSize: 18,color: Color(0xff8d8e98)),)
+                           ],
+                         ),
+                       ),
                        ),
                    Expanded(
                        child: container(Color(0xff1d1e33)),
@@ -74,14 +82,16 @@ class _BMiState extends State<BMI> {
 
 class container extends StatelessWidget {
   final Color colour;
-  container(this.colour);
+  final Widget child;
+  container(this.colour,this.child);
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.all(15),
-    decoration: BoxDecoration(
-    color: colour,
-    borderRadius: BorderRadius.circular(10),
+        decoration: BoxDecoration(
+          color: colour,
+          borderRadius: BorderRadius.circular(10),
     ),
+        child: child,
     );
   }
 }
