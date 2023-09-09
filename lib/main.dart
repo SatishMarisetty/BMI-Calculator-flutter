@@ -34,25 +34,13 @@ class _BMiState extends State<BMI> {
               child: Row(
                  children: <Widget>[
                    Expanded(
-                       child: Container(
-                         margin: EdgeInsets.all(15),
-                         decoration: BoxDecoration(
-                           color: Color(0xff1d1e33),
-                           borderRadius: BorderRadius.circular(10),
-                         ),
+                       child: container(Color(0xff1d1e33)),
 
                          //child: Text(''),
-                       )
-                   ),
+                       ),
                    Expanded(
-                       child: Container(
-                         margin: EdgeInsets.all(15),
-                         decoration: BoxDecoration(
-                           color: Color(0xff1d1e33),
-                           borderRadius: BorderRadius.circular(10),
-                         ),
+                       child: container(Color(0xff1d1e33)),
                          //child: Text(''),
-                       )
                    ),
                  ],
               ),
@@ -60,44 +48,40 @@ class _BMiState extends State<BMI> {
           Expanded(
             flex: 1,
               child:
-              Container(
-                margin: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  color: Color(0xff1d1e33),
-                  borderRadius: BorderRadius.circular(10),
-                ),
+              container(Color(0xff1d1e33)),
                 //child: Text(''),
-              )
           ),
           Expanded(
             flex: 1,
               child:Row(
                 children: <Widget>[
                   Expanded(
-                      child: Container(
-                        margin: EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          color: Color(0xff1d1e33),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                      child: container(Color(0xff1d1e33)),
                         //child: Text(''),
-                      )
                   ),
                   Expanded(
-                      child: Container(
-                        margin: EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          color: Color(0xff1d1e33),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                      child: container(Color(0xff1d1e33)),
                         //child: Text(''),
-                      )
                   ),
                 ],
               ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class container extends StatelessWidget {
+  final Color colour;
+  container(this.colour);
+  Widget build(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.all(15),
+    decoration: BoxDecoration(
+    color: colour,
+    borderRadius: BorderRadius.circular(10),
+    ),
     );
   }
 }
