@@ -36,18 +36,13 @@ class _BMiState extends State<BMI> {
                  children: <Widget>[
                    Expanded(
                        child: container(Color(0xff1d1e33),
-                         const Column(
-                           mainAxisAlignment: MainAxisAlignment.center,
-                           children: <Widget>[
-                             Icon(FontAwesomeIcons.mars,size: 80,),
-                             SizedBox(height: 15,),
-                             Text('MALE',style: TextStyle(fontSize: 18,color: Color(0xff8d8e98)),)
-                           ],
-                         ),
+                         IconIndicator(FontAwesomeIcons.mars,"MALE"),
                        ),
                        ),
                    Expanded(
-                       child: container(Color(0xff1d1e33)),
+                       child: container(Color(0xff1d1e33),
+                         IconIndicator(FontAwesomeIcons.venus,"FEMALE"),
+                       ),
                          //child: Text(''),
                    ),
                  ],
@@ -80,10 +75,27 @@ class _BMiState extends State<BMI> {
   }
 }
 
+class IconIndicator extends StatelessWidget {
+  final IconData icon;
+  final String name;
+  IconIndicator(this.icon,this.name);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Icon(icon,size: 80,),
+        SizedBox(height: 15,),
+        Text(name,style: TextStyle(fontSize: 18,color: Color(0xff8d8e98)),)
+      ],
+    );
+  }
+}
+
 class container extends StatelessWidget {
   final Color colour;
   final Widget child;
-  container(this.colour,this.child);
+  container(this.colour,[this.child=const Text('')]);
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.all(15),
