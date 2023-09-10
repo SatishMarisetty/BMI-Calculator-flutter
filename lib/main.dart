@@ -91,6 +91,7 @@ class _BMiState extends State<BMI> {
 
                   children: <Widget>[
                     Text("HEIGHT",style: TextStyle(color: Color(0xff8d8e98),fontSize: 18),),
+                    SizedBox(height: 5,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.baseline,textBaseline: TextBaseline.alphabetic,
@@ -102,20 +103,29 @@ class _BMiState extends State<BMI> {
                         Text('in',style: TextStyle(color: Color(0xff8d8e98)),),
                       ],
                     ),
-                    Slider(value: inche.toDouble(),
-                        min: 0,
-                        max: 120,
-                        activeColor: Color(0xffeb1555),
-                        inactiveColor: Color(0xff8d8e98),
-                        onChanged: (newValue){
-                      setState(() {
-                        inche=newValue.toInt();
-                        feet=(newValue/12).toInt();
-                        newValue=newValue/12-feet;
-                        inches=(newValue*12).toInt();
-                      });
+                    SliderTheme(
+                      data: SliderThemeData(
+                        activeTrackColor: Colors.white,
+                        inactiveTrackColor: Color(0xff8d8e98),
+                        overlayColor: Color(0x29eb1555),
+                        thumbColor: Color(0xffeb1555),
+                        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15),
+                        overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
+                        trackHeight: 1,
+                      ),
+                      child: Slider(value: inche.toDouble(),
+                          min: 0,
+                          max: 120,
+                          onChanged: (newValue){
+                        setState(() {
+                          inche=newValue.toInt();
+                          feet=(newValue/12).toInt();
+                          newValue=newValue/12-feet;
+                          inches=(newValue*12).toInt();
+                        });
 
-                        })
+                          }),
+                    )
                   ],
                 ),
               ),
