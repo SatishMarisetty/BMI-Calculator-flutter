@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+Color MaleColor = Color(0xff1d1e33);
+Color FemaleColor = Color(0xff1d1e33);
+
+void updateColor(int mode)
+{
+  if (mode==1)
+    {
+      FemaleColor=Colors.white;
+      MaleColor=Color(0xff1d1e33);
+    }
+  else
+    {
+      MaleColor=Colors.white;
+      FemaleColor=Color(0xff1d1e33);
+    }
+}
+
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -31,17 +48,31 @@ class _BMiState extends State<BMI> {
       body: Column(
         children: <Widget>[
           Expanded(
-            flex: 1,
               child: Row(
                  children: <Widget>[
                    Expanded(
-                       child: container(Color(0xff1d1e33),
-                         IconIndicator(FontAwesomeIcons.mars,"MALE"),
+                       child: GestureDetector(
+                         onTap: () {
+                           setState(() {
+                             updateColor(1);
+                           });
+                         },
+                         child: container(MaleColor,
+                           IconIndicator(FontAwesomeIcons.mars,"MALE"),
+                         ),
                        ),
                        ),
                    Expanded(
-                       child: container(Color(0xff1d1e33),
-                         IconIndicator(FontAwesomeIcons.venus,"FEMALE"),
+                       child: GestureDetector(
+                         onTap: () {
+                           setState(() {
+                             updateColor(2);
+                           });
+
+                         },
+                         child: container(FemaleColor,
+                           IconIndicator(FontAwesomeIcons.venus,"FEMALE"),
+                         ),
                        ),
                          //child: Text(''),
                    ),
@@ -49,13 +80,11 @@ class _BMiState extends State<BMI> {
               ),
           ),
           Expanded(
-            flex: 1,
               child:
               container(Color(0xff1d1e33)),
                 //child: Text(''),
           ),
           Expanded(
-            flex: 1,
               child:Row(
                 children: <Widget>[
                   Expanded(
