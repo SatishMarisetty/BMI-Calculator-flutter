@@ -4,16 +4,18 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 Color MaleColor = Color(0xff1d1e33);
 Color FemaleColor = Color(0xff1d1e33);
 
+int feet=5,inches=7,newValue=100,inche=67;
+
 void updateColor(int mode)
 {
   if (mode==1)
     {
-      FemaleColor=Colors.white;
+      FemaleColor=Color(0xff111328);
       MaleColor=Color(0xff1d1e33);
     }
   else
     {
-      MaleColor=Colors.white;
+      MaleColor=Color(0xff111328);
       FemaleColor=Color(0xff1d1e33);
     }
 }
@@ -46,6 +48,7 @@ class _BMiState extends State<BMI> {
         title: Text("BMI Calculator"),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
               child: Row(
@@ -81,11 +84,45 @@ class _BMiState extends State<BMI> {
           ),
           Expanded(
               child:
-              container(Color(0xff1d1e33)),
-                //child: Text(''),
+              container(
+                Color(0xff1d1e33),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: <Widget>[
+                    Text("HEIGHT",style: TextStyle(color: Color(0xff8d8e98),fontSize: 18),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(feet.toString(),style: TextStyle(fontWeight: FontWeight.w900,fontSize: 55),),
+                        Text('ft',style: TextStyle(color: Color(0xff8d8e98)),),
+                        SizedBox(width: 5,),
+                        Text(inches.toString(),style: TextStyle(fontWeight: FontWeight.w900,fontSize: 55),),
+                        Text('in',style: TextStyle(color: Color(0xff8d8e98)),),
+                      ],
+                    ),
+                    Slider(value: inche.toDouble(),
+                        min: 0,
+                        max: 120,
+                        activeColor: Color(0xffeb1555),
+                        inactiveColor: Color(0xff8d8e98),
+                        onChanged: (newValue){
+                      setState(() {
+                        inche=newValue.toInt();
+                        feet=(newValue/12).toInt();
+                        newValue=newValue/12-feet;
+                        inches=(newValue*12).toInt();
+                      });
+
+                        })
+                  ],
+                ),
+              ),
           ),
           Expanded(
               child:Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Expanded(
                       child: container(Color(0xff1d1e33)),
@@ -97,6 +134,12 @@ class _BMiState extends State<BMI> {
                   ),
                 ],
               ),
+          ),
+          Container(
+            height: 70,
+            width: double.infinity,
+            color: Color(0xffeb1555),
+            child: Center(child: Text('CALCULATE',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
           ),
         ],
       ),
