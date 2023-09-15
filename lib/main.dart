@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 Color MaleColor = Color(0xff1d1e33);
 Color FemaleColor = Color(0xff1d1e33);
 
-int feet=5,inches=7,newValue=100,inche=67;
+int feet=5,inches=7,newValue=100,inche=67,weight=65,age=18;
 
 void updateColor(int mode)
 {
@@ -71,7 +71,6 @@ class _BMiState extends State<BMI> {
                            setState(() {
                              updateColor(2);
                            });
-
                          },
                          child: container(FemaleColor,
                            IconIndicator(FontAwesomeIcons.venus,"FEMALE"),
@@ -111,7 +110,7 @@ class _BMiState extends State<BMI> {
                         thumbColor: Color(0xffeb1555),
                         thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15),
                         overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
-                        trackHeight: 1,
+                        trackHeight: 0.2,
                       ),
                       child: Slider(value: inche.toDouble(),
                           min: 0,
@@ -119,7 +118,7 @@ class _BMiState extends State<BMI> {
                           onChanged: (newValue){
                         setState(() {
                           inche=newValue.toInt();
-                          feet=(newValue/12).toInt();
+                          feet=newValue~/12;
                           newValue=newValue/12-feet;
                           inches=(newValue*12).toInt();
                         });
@@ -135,12 +134,72 @@ class _BMiState extends State<BMI> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Expanded(
-                      child: container(Color(0xff1d1e33)),
+                      child: container(Color(0xff1d1e33),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('WEIGHT',style: TextStyle(color: Color(0xff8d8e98),fontSize: 18),),
+                            Text(weight.toString(),style: TextStyle(fontWeight: FontWeight.w900,fontSize: 45),),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RoundFloatingButton(
+                                  icon: FontAwesomeIcons.minus,
+                                  setState: (){
+                                    setState(() {
+                                      weight--;
+                                    });
+                                  },
+                                ),
+                                SizedBox(width: 10,),
+                                RoundFloatingButton(
+                                  icon: FontAwesomeIcons.plus,
+                                  setState: (){
+                                    setState(() {
+                                      weight++;
+                                    });
+                                  },
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      )
                         //child: Text(''),
                   ),
                   Expanded(
-                      child: container(Color(0xff1d1e33)),
-                        //child: Text(''),
+                      child: container(Color(0xff1d1e33),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('AGE',style: TextStyle(color: Color(0xff8d8e98),fontSize: 18),),
+                        Text(age.toString(),style: TextStyle(fontWeight: FontWeight.w900,fontSize: 45),),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundFloatingButton(
+                              icon: FontAwesomeIcons.minus,
+                              setState: (){
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                            SizedBox(width: 10,),
+                            RoundFloatingButton(
+                              icon: FontAwesomeIcons.plus,
+                              setState: (){
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+
+                  ),
                   ),
                 ],
               ),
@@ -168,7 +227,7 @@ class IconIndicator extends StatelessWidget {
       children: <Widget>[
         Icon(icon,size: 80,),
         SizedBox(height: 15,),
-        Text(name,style: TextStyle(fontSize: 18,color: Color(0xff8d8e98)),)
+        Text(name,style: TextStyle(fontSize: 18,color: Color(0xff8d8e98)),),
       ],
     );
   }
@@ -189,3 +248,22 @@ class container extends StatelessWidget {
     );
   }
 }
+class RoundFloatingButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback setState;
+  RoundFloatingButton({required this.icon, required this.setState});
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+        fillColor: Color(0xff4c4f5e),
+        constraints: const BoxConstraints.tightFor(
+          width: 56.0,
+          height: 56.0,
+        ),
+        shape: CircleBorder(),
+        elevation: 6,
+        child: Icon(icon),
+        onPressed: setState,
+    );
+        }
+  }
+
