@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'results.dart';
+import 'bmiCalculate.dart';
 
 Color MaleColor = Color(0xff1d1e33);
 Color FemaleColor = Color(0xff1d1e33);
@@ -204,11 +206,20 @@ class _BMiState extends State<BMI> {
                 ],
               ),
           ),
-          Container(
-            height: 70,
-            width: double.infinity,
-            color: Color(0xffeb1555),
-            child: Center(child: Text('CALCULATE',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
+          GestureDetector(
+            onTap: (){
+              CalculateBMI().setter(inche.toDouble(),weight.toDouble());
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context)=>ResultPage()),
+              );
+            },
+            child: Container(
+              height: 70,
+              width: double.infinity,
+              color: Color(0xffeb1555),
+              child: Center(child: Text('CALCULATE',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
+            ),
           ),
         ],
       ),
@@ -236,7 +247,7 @@ class IconIndicator extends StatelessWidget {
 class container extends StatelessWidget {
   final Color colour;
   final Widget child;
-  container(this.colour,[this.child=const Text('')]);
+  container(this.colour,this.child);
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.all(15),
@@ -266,4 +277,3 @@ class RoundFloatingButton extends StatelessWidget {
     );
         }
   }
-
